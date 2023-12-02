@@ -1,4 +1,4 @@
-# Astro Starter Kit: Blog
+# forloop.dev
 
 ```sh
 npm create astro@latest -- --template blog
