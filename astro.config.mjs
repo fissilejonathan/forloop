@@ -1,10 +1,15 @@
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
+import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
+import storyblok from "@storyblok/astro";
+import sitemap from "@astrojs/sitemap";
 
-import sitemap from '@astrojs/sitemap';
-
-// https://astro.build/config
 export default defineConfig({
-	site: 'https://forloop.dev',
-	integrations: [mdx(), sitemap()],
+  site: "https://forloop.dev",
+  integrations: [
+    mdx(),
+    sitemap(),
+    storyblok({
+      accessToken: "MdccNU2eW06iEVcr3RIJlwtt",
+    }),
+  ],
 });
