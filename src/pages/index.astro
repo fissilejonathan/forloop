@@ -4,7 +4,6 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
-import FormattedDate from "../components/FormattedDate.astro";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
@@ -18,7 +17,29 @@ const posts = (await getCollection("blog")).sort(
   </head>
   <body>
     <Header />
-    <main style="color: white; text-align: center;">welcome</main>
+    <main style="color: white; text-align: center;">
+      {
+        posts
+          .map((post) => {
+            let html = null;
+
+            switch (post.data.type) {
+              case "link":
+                html = (
+                  <div>
+                    <a target="_blank" href={post.data.url}>
+                      {post.data.title}
+                    </a>
+                  </div>
+                );
+                break;
+            }
+
+            return html;
+          })
+          .filter((html) => html !== null)
+      }
+    </main>
     <Footer />
   </body>
 </html>
