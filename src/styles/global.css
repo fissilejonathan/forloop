@@ -3,6 +3,7 @@
 	--gray: 96, 115, 159;
 	--gray-light: 229, 233, 240;
 }
+
 @font-face {
 	font-family: 'Atkinson';
 	src: url('/fonts/atkinson-regular.woff') format('woff');
@@ -17,6 +18,7 @@
 	font-style: normal;
 	font-display: swap;
 }
+
 body {
 	font-family: 'Atkinson', sans-serif;
 	margin: 0;
@@ -41,7 +43,14 @@ main {
 header {
 	margin: 0;
 	padding: 1em 1em;
-	background: white;
+	color:white
+}
+
+footer {
+	padding: 2em 1em 6em 1em;
+	background: linear-gradient(var(--gray-gradient)) no-repeat;
+	/* color: rgb(var(--gray)); */
+	text-align: center;
 }
 
 nav {
@@ -51,8 +60,11 @@ nav {
 }
 nav a {
 	padding: 1em 0.5em;
-	color: var(--black);
+	color: white;
 	border-bottom: 4px solid transparent;
+}
+
+a {
 	text-decoration: none;
 }
 
@@ -144,6 +156,14 @@ blockquote {
 hr {
 	border: none;
 	border-top: 1px solid rgb(var(--gray-light));
+}
+
+.link-post > a:visited {
+	color: rgb(var(--gray))
+}
+
+.link-post > a:not(:visited) {
+	color: white;
 }
 
 @media (max-width: 720px) {
