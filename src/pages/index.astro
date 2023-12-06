@@ -15,9 +15,9 @@ const posts = (await getCollection("blog")).sort(
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
-  <body>
+  <body class="bg-[#0A0908] text-white">
     <Header />
-    <main style="color: white; text-align: center;">
+    <main>
       {
         posts
           .map((post) => {
