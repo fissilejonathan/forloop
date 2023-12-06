@@ -24,10 +24,6 @@ const posts = (await getCollection("blog")).sort(
             .map((post) => {
               let html = null;
 
-              const tags = post.data.tags.map((tag) => {
-                return <></>
-              });
-
               switch (post.data.type) {
                 case "link":
                   html = (
@@ -39,9 +35,15 @@ const posts = (await getCollection("blog")).sort(
                         href={post.data.url}
                       >
                         <span>{post.data.title}</span>
-                        <span class="flex">{post.data.tags.map(tag => <span class="rounded-md border-white border-[1px] p-1 text-sm">{tag}</span>)}</span>
-                        </a>
-                    </li> 
+                        <span class="flex">
+                          {post.data.tags.map((tag) => (
+                            <span class="rounded-md border-white border-[1px] px-2 text-[0.7rem]">
+                              {tag}
+                            </span>
+                          ))}
+                        </span>
+                      </a>
+                    </li>
                   );
                   break;
               }
