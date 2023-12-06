@@ -29,7 +29,7 @@ const posts = (await getCollection("blog")).sort(
                   html = (
                     <li>
                       <a
-                        class="text-lg flex space-x-3"
+                        class="text-lg lg:flex lg:space-x-3"
                         target="_blank"
                         title={post.data.title}
                         href={post.data.url}
