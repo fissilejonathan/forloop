@@ -63,4 +63,7 @@ jobs:
           git config --local user.name "GitHub Actions"
           git add src/content/blog/${{ steps.set-file-name.outputs.file_name }}.md
           git commit -m "Created ${{ steps.set-file-name.outputs.file_name }}.md"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
