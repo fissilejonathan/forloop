@@ -34,9 +34,22 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v3
+      - name: set file name
+        run: |
+          FILE_NAME=$(echo "${{ github.event.inputs.title }}" | tr ' ' '-')
+          echo "::set-output name=file_name::$FILE_NAME"
+      - name: convert tags to array
+        run: |
+          IFS=',' read -ra TAGS_ARRAY <<< "${{ github.event.inputs.tags }}"
+          echo "::set-output name=tags_array::${TAGS_ARRAY[@]}"
       - name: create post markdown file
         run: |
-          cd src/content/blog
-          ls
-          files=($(ls *.md))
-          json_array=()
+          echo "---" > ${{ steps.set-file-name.outputs.file_name }}.md
+          echo "type: '${{ github.event.inputs.type }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
+          echo "title: '${{ github.event.inputs.title }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
+          echo "tldr: '${{ github.event.inputs.tldr }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
+          echo "pubDate: '${{ github.event.inputs.pubDate }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
+          echo "tags: ['${{ steps.convert-tags.outputs.tags_array[*] }}']" >> ${{ steps.set-file-name.outputs.file_name }}.md
+          echo "url: '${{ github.event.inputs.url }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
+          echo "---" >> ${{ steps.set-file-name.outputs.file_name }}.md
+          cat ${{ steps.set-file-name.outputs.file_name }}.md
