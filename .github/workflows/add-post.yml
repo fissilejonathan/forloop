@@ -42,8 +42,8 @@ jobs:
         id: convert-tags
         run: |
           IFS=',' read -ra TAGS_ARRAY <<< "${{ github.event.inputs.tags }}"
-          TAGS_STRING=$(IFS=","; echo "'${TAGS_ARRAY[*]}'")
-          echo "TAGS_STRING=$TAGS_STRING" >> $GITHUB_ENV
+          TAGS_STRING=$(IFS="','"; echo "'${TAGS_ARRAY[*]}'")
+          echo "tags_string=$TAGS_STRING" >> $GITHUB_ENV
       - name: create post markdown file
         run: |
           cd src/content/blog
