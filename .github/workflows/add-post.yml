@@ -44,6 +44,7 @@ jobs:
           echo "::set-output name=tags_array::${TAGS_ARRAY[@]}"
       - name: create post markdown file
         run: |
+          cd src/content/blog
           echo "---" > ${{ steps.set-file-name.outputs.file_name }}.md
           echo "type: '${{ github.event.inputs.type }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
           echo "title: '${{ github.event.inputs.title }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
