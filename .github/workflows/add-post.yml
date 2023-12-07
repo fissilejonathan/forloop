@@ -16,10 +16,6 @@ on:
         type: choice
         options:
           - link
-      pubDate:
-        description: "publication date"
-        required: true
-        type: string
       tags:
         description: "tags"
         required: true
@@ -37,7 +33,11 @@ jobs:
       - name: set file name
         id: set-file-name
         run: |
-          echo "file_name=$(echo "${{ github.event.inputs.title }}" | tr ' ' '-')" >> $GITHUB_OUTPUT
+          DATE=$(date +"%Y%m")
+          FILE_NAME=$(echo "${DATE}_${{ github.event.inputs.title }}" | tr ' ' '-')
+          PUB_DATE=$(date +"%b %-d %Y")
+          echo "file_name=$FILE_NAME" >> $GITHUB_OUTPUT
+          echo "pub_date=$PUB_DATE" >> $GITHUB_OUTPUT
       - name: convert tags to array
         id: convert-tags
         run: |
@@ -52,8 +52,15 @@ jobs:
           echo "type: '${{ github.event.inputs.type }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
           echo "title: '${{ github.event.inputs.title }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
           echo "tldr: '${{ github.event.inputs.tldr }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
-          echo "pubDate: '${{ github.event.inputs.pubDate }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
+          echo "pubDate: '${{ steps.set-file-name.outputs.pub_date }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
           echo "tags: [${{ steps.convert-tags.outputs.tags_string }}]" >> ${{ steps.set-file-name.outputs.file_name }}.md
           echo "url: '${{ github.event.inputs.url }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
           echo "---" >> ${{ steps.set-file-name.outputs.file_name }}.md
           cat ${{ steps.set-file-name.outputs.file_name }}.md
+      - name: commit and push
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add src/content/blog/${{ steps.set-file-name.outputs.file_name }}.md
+          git commit -m "Created ${{ steps.set-file-name.outputs.file_name }}.md"
+          git push
