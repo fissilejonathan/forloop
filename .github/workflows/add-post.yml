@@ -44,7 +44,7 @@ jobs:
           IFS=',' read -ra TAGS_ARRAY <<< "${{ github.event.inputs.tags }}"
           TAGS_STRING=$(IFS=","; echo "'${TAGS_ARRAY[*]}'")
           echo $TAGS_STRING
-          echo "tags_string=$TAGS_STRING" >> $GITHUB_ENV
+          echo "tags_string=$TAGS_STRING" >> $GITHUB_OUTPUT
       - name: create post markdown file
         run: |
           cd src/content/blog
