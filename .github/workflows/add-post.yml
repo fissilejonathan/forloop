@@ -33,7 +33,7 @@ jobs:
       - name: set file name
         id: set-file-name
         run: |
-          DATE=$(date +"%Y%m")
+          DATE=$(date + "%Y%m%d")
           FILE_NAME=$(echo "${DATE}_${{ github.event.inputs.title }}" | tr ' ' '-')
           PUB_DATE=$(date +"%b %-d %Y")
           echo "file_name=$FILE_NAME" >> $GITHUB_OUTPUT
