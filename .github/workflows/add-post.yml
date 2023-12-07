@@ -37,3 +37,6 @@ jobs:
       - name: create post markdown file
         run: |
           ls
+          cd src/content/blog
+          files=($(ls *.md))
+          json_array=()
