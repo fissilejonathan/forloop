@@ -41,7 +41,7 @@ jobs:
       - name: convert tags to array
         run: |
           IFS=',' read -ra TAGS_ARRAY <<< "${{ github.event.inputs.tags }}"
-          echo "::set-output name=tags_array::${TAGS_ARRAY[@]}"
+          echo "::set-output name=tags_array::${TAGS_ARRAY[*]}"
       - name: create post markdown file
         run: |
           cd src/content/blog
@@ -50,7 +50,7 @@ jobs:
           echo "title: '${{ github.event.inputs.title }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
           echo "tldr: '${{ github.event.inputs.tldr }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
           echo "pubDate: '${{ github.event.inputs.pubDate }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
-          echo "tags: ['${{ steps.convert-tags.outputs.tags_array[*] }}']" >> ${{ steps.set-file-name.outputs.file_name }}.md
+          echo "tags: [${{ steps.convert-tags.outputs.tags_array }}]" >> ${{ steps.set-file-name.outputs.file_name }}.md
           echo "url: '${{ github.event.inputs.url }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
           echo "---" >> ${{ steps.set-file-name.outputs.file_name }}.md
           cat ${{ steps.set-file-name.outputs.file_name }}.md
