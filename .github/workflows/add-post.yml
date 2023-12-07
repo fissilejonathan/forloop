@@ -1,0 +1,39 @@
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: "title"
+        required: true
+        type: string
+      tldr:
+        description: "tldr"
+        required: false
+        type: string
+      type:
+        description: "type"
+        required: true
+        default: "link"
+        type: choice
+        options:
+          - link
+      pubDate:
+        description: "publication date"
+        required: true
+        type: string
+      tags:
+        description: "tags"
+        required: true
+        type: string
+      url:
+        description: "url"
+        required: true
+        type: string
+jobs:
+  create-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+      - name: create post markdown file
+        run: |
+          ls
