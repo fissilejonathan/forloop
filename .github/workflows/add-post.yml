@@ -35,12 +35,14 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v3
       - name: set file name
+        id: set-file-name
         run: |
-          FILE_NAME=$(echo "${{ github.event.inputs.title }}" | tr ' ' '-') >> $GITHUB_OUTPUT
+          echo "file_name=$(echo "${{ github.event.inputs.title }}" | tr ' ' '-')" >> $GITHUB_OUTPUT
       - name: convert tags to array
+        id: convert-tags
         run: |
           IFS=',' read -ra TAGS_ARRAY <<< "${{ github.event.inputs.tags }}"
-          echo "::set-output name=tags_array::${TAGS_ARRAY[*]}"
+          echo "tags_array=${TAGS_ARRAY[*]}" >> $GITHUB_OUTPUT
       - name: create post markdown file
         run: |
           cd src/content/blog
