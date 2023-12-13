@@ -15,7 +15,7 @@ const posts = (await getCollection("blog")).sort(
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
-  <body class="bg-[#0A0908] text-white">
+  <body class="bg-white text-black dark:bg-[#0A0908] dark:text-white">
     <Header />
     <main class="mx-5 mb-10 sm:mx-auto max-w-2xl">
       <ul class="space-y-4 lg:space-y-3">
@@ -35,9 +35,9 @@ const posts = (await getCollection("blog")).sort(
                         href={post.data.url}
                       >
                         <span>{post.data.title}</span>
-                        <span class="flex space-x-2">
+                        <span class="flex space-x-[5px]">
                           {post.data.tags.map((tag) => (
-                            <span class="rounded-md border-white border-[1px] px-2 text-[0.7rem]">
+                            <span class="border-black rounded-md border-[1px] px-1 text-[0.7rem] font-medium dark:border-white">
                               {tag}
                             </span>
                           ))}

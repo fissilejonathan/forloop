@@ -3,7 +3,31 @@ import { SITE_TITLE } from "../consts";
 ---
 
 <header>
-  <nav class="p-6">
-    <h2><a title={SITE_TITLE} href="/">{SITE_TITLE}</a></h2>
+  <nav class="p-6 flex justify-between">
+    <span>
+      <h2><a title={SITE_TITLE} href="/">{SITE_TITLE}</a></h2>
+    </span>
+    <span id="theme-switcher" class="cursor-pointer">
+      <img class="h-[32px] dark:hidden" src="sun.png" />
+      <img class="h-[30px] hidden dark:inline-block" src="moon.png" />
+    </span>
   </nav>
 </header>
+
+<script>
+  if (localStorage.theme === "dark") {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+
+  document.querySelector("#theme-switcher")?.addEventListener("click", () => {
+    if (localStorage.theme === "dark") {
+      localStorage.theme = "light";
+      document.documentElement.classList.remove("dark");
+    } else {
+      localStorage.theme = "dark";
+      document.documentElement.classList.add("dark");
+    }
+  });
+</script>
