@@ -1,6 +1,6 @@
 ---
 type: 'link'
-title: 'Relational deep learning: graph representation learning on relational databases'
+title: 'Deep learning on relational databases'
 tldr: ''
 pubDate: 'Dec 13 2023'
 tags: ['whitepaper']
