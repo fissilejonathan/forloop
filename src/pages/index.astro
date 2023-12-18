@@ -34,15 +34,15 @@ const tags = posts
                   html = (
                     <li data-tags={post.data.tags.join(",")}>
                       <a
-                        class="text-lg sm:flex sm:space-x-3"
+                        class="sm:flex sm:space-x-3"
                         target="_blank"
                         title={post.data.title}
                         href={post.data.url}
                       >
                         <span>{post.data.title}</span>
-                        <span class="flex space-x-[5px]">
+                        <span class="flex space-x-[5px] justify-center items-center">
                           {post.data.tags.map((tag) => (
-                            <span class="border-black rounded-md border-[1px] px-1 text-[0.7rem] font-medium h-[30px] dark:border-white">
+                            <span class="border-black rounded-md border-[1px] px-1 text-[0.7rem] font-medium h-[20px] dark:border-white">
                               {tag}
                             </span>
                           ))}
