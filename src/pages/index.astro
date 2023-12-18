@@ -8,17 +8,22 @@ import { getCollection } from "astro:content";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const tags = posts
+  .flatMap((post) => post.data.tags)
+  .reduce((acc, current) => acc.add(current), new Set());
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
+  <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+
   <body class="bg-[#f6f5e9] text-black dark:bg-[#0A0908] dark:text-white">
     <Header />
-    <main class="mx-5 mb-10 sm:mx-auto max-w-2xl">
-      <ul class="space-y-4 lg:space-y-3">
+    <main
+      class="flex sm:grid grid-cols-3 space-x-5 mx-5 mb-10 lg:mx-auto max-w-3xl"
+    >
+      <ul id="posts" class="col-span-2 space-y-4 lg:space-y-3">
         {
           posts
             .map((post) => {
@@ -27,7 +32,7 @@ const posts = (await getCollection("blog")).sort(
               switch (post.data.type) {
                 case "link":
                   html = (
-                    <li>
+                    <li data-tags={post.data.tags.join(",")}>
                       <a
                         class="text-lg sm:flex sm:space-x-3"
                         target="_blank"
@@ -53,7 +58,66 @@ const posts = (await getCollection("blog")).sort(
             .filter((html) => html !== null)
         }
       </ul>
+      <div class="col-span-1 hidden sm:block">
+        {
+          [...tags].sort().map((tag) => (
+            <div data-tag class="text-sm p-[3px] cursor-pointer">
+              {tag}
+            </div>
+          ))
+        }
+      </div>
+      <Footer />
     </main>
-    <Footer />
+    <script>
+      const tags = document.querySelectorAll("[data-tag]");
+
+      tags.forEach((tag) => {
+        tag.addEventListener("click", (event) => {
+          const targetTag = event.target as HTMLElement;
+          const selectedTags = document.querySelectorAll("[data-selected]");
+
+          const tagAlreadySelected = Array.prototype.some.call(
+            selectedTags,
+            (tag) => tag.innerText === targetTag.innerText
+          );
+
+          if (tagAlreadySelected) {
+            targetTag.classList.remove("font-extrabold");
+            targetTag.removeAttribute("data-selected");
+          } else {
+            targetTag.classList.add("font-extrabold");
+            targetTag.setAttribute("data-selected", "");
+          }
+
+          const updatedSelectedTags = Array.prototype.map.call(
+            document.querySelectorAll("[data-selected]"),
+            (element) => element.innerText
+          ) as string[];
+
+          const posts = document.querySelectorAll("#posts li");
+
+          if (updatedSelectedTags.length > 0) {
+            posts.forEach((post) => {
+              const postTags = post.getAttribute("data-tags")?.split(",");
+
+              const postHasTag = postTags?.some((postTag) =>
+                updatedSelectedTags.includes(postTag)
+              );
+
+              if (!postHasTag) {
+                post.classList.add("hidden");
+              } else {
+                post.classList.remove("hidden");
+              }
+            });
+          } else {
+            posts.forEach((post) => {
+              post.classList.remove("hidden");
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
