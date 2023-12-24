@@ -47,7 +47,7 @@ jobs:
           echo "tags_string=$TAGS_STRING" >> $GITHUB_OUTPUT
       - name: create post markdown file
         run: |
-          cd src/content/blog
+          cd src/content/link
           echo "---" > ${{ steps.set-file-name.outputs.file_name }}.md
           echo "type: '${{ github.event.inputs.type }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
           echo "title: '${{ github.event.inputs.title }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
@@ -61,7 +61,7 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add src/content/blog/${{ steps.set-file-name.outputs.file_name }}.md
+          git add src/content/link/${{ steps.set-file-name.outputs.file_name }}.md
           git commit -m "Created ${{ steps.set-file-name.outputs.file_name }}.md"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git push
