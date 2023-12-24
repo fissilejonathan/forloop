@@ -1,6 +1,6 @@
 ---
 type: 'link'
-title: 'err != nil Is GOOD?'
+title: 'err != nil is good?'
 tldr: ''
 pubDate: 'Dec 24 2023'
 tags: ['go','javascript']
