@@ -1,20 +1,17 @@
 ---
 type: "article"
-title: "My favorite pragmatic programmer tips"
+title: "My Favorite Pragmatic Programmer Tips"
 tldr: ""
-pubDate: "Dec 24 2023"
-tags: ["go"]
+pubDate: "Dec 25 2023"
+tags: ["best practice"]
 ---
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Example HTML5 Document</title>
-  </head>
-  <body>
-    <p>Test</p>
-  </body>
-</html>
-```
+### Don’t Live with Broken Windows
+
+### Invest Regularly in Your Knowledge Portfolio
+
+### DRY —Don’t Repeat Yourself
+
+### Eliminate Effects Between Unrelated Things
+
+### You Can’t Write Perfect Software
