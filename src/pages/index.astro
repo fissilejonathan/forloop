@@ -1,8 +1,5 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import BaseLayout from "../layouts/BaseLayout.astro"
 import { getCollection } from "astro:content";
 
 const posts = [
@@ -15,59 +12,50 @@ const tags = posts
   .reduce((acc, current) => acc.add(current), new Set());
 ---
 
-<!doctype html>
-<html lang="en">
-  <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+<BaseLayout>
+  <div class="flex sm:grid grid-cols-3 space-x-5">
+    <ul id="posts" class="col-span-2 space-y-4 lg:space-y-3">
+      {
+        posts.map((post) => {
+          let href = null;
 
-  <body class="bg-[#f6f5e9] text-black dark:bg-[#0A0908] dark:text-white">
-    <Header />
-    <main
-      class="flex sm:grid grid-cols-3 space-x-5 mx-5 mb-10 lg:mx-auto max-w-3xl"
-    >
-      <ul id="posts" class="col-span-2 space-y-4 lg:space-y-3">
-        {
-          posts.map((post) => {
-            let href = null;
+          if ("url" in post.data) {
+            href = post.data.url;
+          } else {
+            href = `/${post.slug}`;
+          }
 
-            if ("url" in post.data) {
-              href = post.data.url;
-            } else {
-              href = `/${post.slug}`;
-            }
-
-            return (
-              <li data-tags={post.data.tags.join(",")}>
-                <a
-                  class="sm:flex sm:space-x-3"
-                  target="_blank"
-                  title={post.data.title}
-                  href={href}
-                >
-                  <span>{post.data.title}</span>
-                  <span class="flex space-x-[5px] sm:justify-center sm:items-center">
-                    {post.data.tags.map((tag) => (
-                      <span class="border-black rounded-md border-[1px] px-1 text-[0.7rem] font-medium h-[20px] dark:border-white">
-                        {tag}
-                      </span>
-                    ))}
-                  </span>
-                </a>
-              </li>
-            );
-          })
-        }
-      </ul>
-      <div class="col-span-1 hidden sm:block">
-        {
-          [...tags].sort().map((tag) => (
-            <div data-tag class="text-sm p-[3px] cursor-pointer">
-              {tag}
-            </div>
-          ))
-        }
-      </div>
-      <Footer />
-    </main>
+          return (
+            <li data-tags={post.data.tags.join(",")}>
+              <a
+                class="sm:flex sm:space-x-3"
+                target="_blank"
+                title={post.data.title}
+                href={href}
+              >
+                <span>{post.data.title}</span>
+                <span class="flex space-x-[5px] sm:justify-center sm:items-center">
+                  {post.data.tags.map((tag) => (
+                    <span class="border-black rounded-md border-[1px] px-1 text-[0.7rem] font-medium h-[20px] dark:border-white">
+                      {tag}
+                    </span>
+                  ))}
+                </span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+    <div class="col-span-1 hidden sm:block">
+      {
+        [...tags].sort().map((tag) => (
+          <div data-tag class="text-sm p-[3px] cursor-pointer">
+            {tag}
+          </div>
+        ))
+      }
+    </div>
     <script>
       const tags = document.querySelectorAll("[data-tag]");
 
@@ -118,5 +106,5 @@ const tags = posts
         });
       });
     </script>
-  </body>
-</html>
+  </div>
+</BaseLayout>

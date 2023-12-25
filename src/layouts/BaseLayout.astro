@@ -1,0 +1,19 @@
+
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+
+<!doctype html>
+<html lang="en">
+  <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+
+  <body class="lg:mx-auto max-w-3xl mx-5 mb-10 bg-[#f6f5e9] text-black dark:bg-[#0A0908] dark:text-white">
+    <Header />
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
