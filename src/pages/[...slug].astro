@@ -18,8 +18,6 @@ const { Content } = await article.render();
 ---
 
 <BaseLayout>
-	<h1>{article.data.title}</h1>
-	<div>
-		<Content />
-	</div>
+	<h2 class="mb-5">{article.data.title}</h2>
+	<Content />
 </BaseLayout>
