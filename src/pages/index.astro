@@ -7,7 +7,7 @@ import { getCollection } from "astro:content";
 
 const posts = [
   ...(await getCollection("link")),
-  ...(await getCollection("blog")),
+  ...(await getCollection("article")),
 ].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const tags = posts
@@ -26,37 +26,35 @@ const tags = posts
     >
       <ul id="posts" class="col-span-2 space-y-4 lg:space-y-3">
         {
-          posts
-            .map((post) => {
-              let html = null;
+          posts.map((post) => {
+            let href = null;
 
-              switch (post.data.type) {
-                case "link":
-                  html = (
-                    <li data-tags={post.data.tags.join(",")}>
-                      <a
-                        class="sm:flex sm:space-x-3"
-                        target="_blank"
-                        title={post.data.title}
-                        href={post.data.url}
-                      >
-                        <span>{post.data.title}</span>
-                        <span class="flex space-x-[5px] sm:justify-center sm:items-center">
-                          {post.data.tags.map((tag) => (
-                            <span class="border-black rounded-md border-[1px] px-1 text-[0.7rem] font-medium h-[20px] dark:border-white">
-                              {tag}
-                            </span>
-                          ))}
-                        </span>
-                      </a>
-                    </li>
-                  );
-                  break;
-              }
+            if ("url" in post.data) {
+              href = post.data.url;
+            } else {
+              href = `/${post.slug}`;
+            }
 
-              return html;
-            })
-            .filter((html) => html !== null)
+            return (
+              <li data-tags={post.data.tags.join(",")}>
+                <a
+                  class="sm:flex sm:space-x-3"
+                  target="_blank"
+                  title={post.data.title}
+                  href={href}
+                >
+                  <span>{post.data.title}</span>
+                  <span class="flex space-x-[5px] sm:justify-center sm:items-center">
+                    {post.data.tags.map((tag) => (
+                      <span class="border-black rounded-md border-[1px] px-1 text-[0.7rem] font-medium h-[20px] dark:border-white">
+                        {tag}
+                      </span>
+                    ))}
+                  </span>
+                </a>
+              </li>
+            );
+          })
         }
       </ul>
       <div class="col-span-1 hidden sm:block">
