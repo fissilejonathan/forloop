@@ -4,6 +4,7 @@ title: "My Favorite Pragmatic Programmer Tips"
 tldr: ""
 pubDate: "Dec 25 2023"
 tags: ["best practice"]
+published: false
 ---
 
 ### Don’t Live with Broken Windows
