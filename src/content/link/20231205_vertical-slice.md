@@ -1,6 +1,6 @@
 ---
 type: "link"
-title: "Refactoring the domain layer structure with vertical slices"
+title: "Domain layer structure with vertical slices"
 tldr: ""
 pubDate: "Dec 5 2023"
 tags: ["system design"]
