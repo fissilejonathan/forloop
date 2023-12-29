@@ -35,7 +35,7 @@ const tags = posts
               >
                 <span>{post.data.title}</span>
                 <span class="flex space-x-[5px] sm:justify-center sm:items-center">
-                  {post.data.tags.map((tag) => (
+                  {post.data.tags.sort().map((tag) => (
                     <span class="border-black rounded-md border-[1px] px-1 text-[0.7rem] font-medium h-[20px] dark:border-white">
                       {tag}
                     </span>
