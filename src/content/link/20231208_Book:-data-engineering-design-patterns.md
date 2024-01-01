@@ -1,8 +1,8 @@
 ---
 type: 'link'
-title: 'Book: data engineering design patterns'
+title: 'Data engineering design patterns'
 tldr: ''
 pubDate: 'Dec 8 2023'
-tags: ['database']
+tags: ['database', 'system design']
 url: 'https://www.dedp.online/about-this-book.html'
 ---
