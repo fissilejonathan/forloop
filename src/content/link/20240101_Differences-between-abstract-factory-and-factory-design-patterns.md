@@ -1,6 +1,6 @@
 ---
 type: 'link'
-title: 'Abstract factory <> factory method'
+title: 'Abstract factory != factory method'
 tldr: ''
 pubDate: 'Jan 1 2024'
 tags: ['system design']
