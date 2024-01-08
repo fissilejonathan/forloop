@@ -1,6 +1,6 @@
 ---
 type: 'link'
-title: 'Towards modern development of cloud applications'
+title: 'Modern cloud applications'
 tldr: ''
 pubDate: 'Jan 8 2024'
 tags: ['whitepaper','system design']
