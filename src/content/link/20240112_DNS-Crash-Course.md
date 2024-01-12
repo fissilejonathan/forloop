@@ -1,6 +1,6 @@
 ---
 type: 'link'
-title: 'DNS Crash Course'
+title: 'DNS crash course'
 tldr: ''
 pubDate: 'Jan 12 2024'
 tags: ['networking']
