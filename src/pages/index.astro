@@ -7,9 +7,21 @@ const posts = [
   ...(await getCollection("article")).filter(article => article.data.published),
 ].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const tags = posts
+const tagsMap = posts
   .flatMap((post) => post.data.tags)
-  .reduce((acc, current) => acc.add(current), new Set());
+  .reduce((acc, current) => {
+    if(acc.has(current)) {
+      console.log(`has ${current} ${acc.get(current)}`)
+      acc.set(current, (acc.get(current) ?? 0) + 1)
+    } else {
+      console.log(`doesn't have ${current}`)
+      acc.set(current, 1)
+    }
+
+    return acc
+  }, new Map<string, number>());
+
+const sortTags = Array.from(tagsMap).sort(([keyA], [keyB]) => keyA.localeCompare(keyB));
 ---
 
 <BaseLayout>
@@ -49,9 +61,10 @@ const tags = posts
     </ul>
     <div class="col-span-1 hidden sm:block">
       {
-        [...tags].sort().map((tag) => (
-          <div data-tag class="text-sm p-[3px] cursor-pointer">
-            {tag}
+        [...sortTags].map((tag) => (
+          <div class="text-sm p-[3px] cursor-pointer">
+            <span data-tag>{tag[0]}</span>
+            <span class="text-[10px] italic rounded-full p-[2px]">{tag[1]}</span>
           </div>
         ))
       }
