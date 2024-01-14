@@ -5,6 +5,10 @@ on:
         description: "title"
         required: true
         type: string
+      fileName:
+        description: "title"
+        required: true
+        type: string
       tldr:
         description: "tldr"
         required: false
@@ -34,7 +38,7 @@ jobs:
         id: set-file-name
         run: |
           DATE=$(date +"%Y%m%d")
-          FILE_NAME=$(echo "${DATE}_${{ github.event.inputs.title }}" | tr ' ' '-')
+          FILE_NAME=$(echo "${DATE}_${{ github.event.inputs.fileName }}" | tr ' ' '-')
           PUB_DATE=$(date +"%b %-d %Y")
           echo "file_name=$FILE_NAME" >> $GITHUB_OUTPUT
           echo "pub_date=$PUB_DATE" >> $GITHUB_OUTPUT
