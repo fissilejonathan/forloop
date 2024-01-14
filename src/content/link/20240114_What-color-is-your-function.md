@@ -1,6 +1,6 @@
 ---
 type: 'link'
-title: 'What color is your function'
+title: 'What color is your function?'
 tldr: ''
 pubDate: 'Jan 14 2024'
 tags: ['food for thought']
