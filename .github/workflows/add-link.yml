@@ -6,7 +6,7 @@ on:
         required: true
         type: string
       fileName:
-        description: "title"
+        description: "file name"
         required: true
         type: string
       tldr:
