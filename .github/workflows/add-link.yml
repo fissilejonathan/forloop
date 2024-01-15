@@ -54,7 +54,7 @@ jobs:
           cd src/content/link
           echo "---" > ${{ steps.set-file-name.outputs.file_name }}.md
           echo "type: '${{ github.event.inputs.type }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
-          echo "title: '${{ github.event.inputs.title }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
+          echo "title: \"${{ github.event.inputs.title }}\"" >> ${{ steps.set-file-name.outputs.file_name }}.md
           echo "tldr: '${{ github.event.inputs.tldr }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
           echo "pubDate: '${{ steps.set-file-name.outputs.pub_date }}'" >> ${{ steps.set-file-name.outputs.file_name }}.md
           echo "tags: [${{ steps.convert-tags.outputs.tags_string }}]" >> ${{ steps.set-file-name.outputs.file_name }}.md
