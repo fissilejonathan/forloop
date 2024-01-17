@@ -46,7 +46,7 @@ const sortTags = Array.from(tagsMap).sort(([keyA], [keyB]) => keyA.localeCompare
                 <span>{post.data.title}</span>
                 <span class="flex space-x-[5px] sm:justify-center sm:items-center">
                   {post.data.tags.sort().map((tag) => (
-                    <span class={`text-center border-black rounded-md border-[1px] px-1 text-[0.7rem] font-medium h-[20px] dark:border-white ${tag.length > 12 ? 'min-w-[100px]' : ''}`}>
+                    <span class={`text-center border-black rounded-md border-[1px] px-1 text-[0.7rem] font-medium h-[20px] dark:border-white min-w-fit`}>
                       {tag}
                     </span>
                   ))}
