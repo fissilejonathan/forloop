@@ -1,6 +1,6 @@
 ---
 type: 'link'
-title: "Using rayon create in rust"
+title: "Using the rayon crate in rust"
 tldr: ''
 pubDate: 'Jan 19 2024'
 tags: ['rust']
